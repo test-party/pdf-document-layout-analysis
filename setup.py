@@ -14,5 +14,5 @@ setup(
     author="HURIDOCS",
     description="This tool is for PDF document layout analysis",
     install_requires=requirements,
-    setup_requieres=requirements,
+    setup_requires=requirements,
 )
