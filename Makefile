@@ -18,28 +18,28 @@ check_format:
 	. .venv/bin/activate; command black --line-length 125 . --check
 
 remove_docker_containers:
-	docker compose ps -q | xargs docker rm
+	docker-compose ps -q | xargs docker rm
 
 remove_docker_images:
-	docker compose config --images | xargs docker rmi
+	docker-compose config --images | xargs docker rmi
 
 start:
 	mkdir -p ./models
 ifeq ($(HAS_GPU), 1)
 	@echo "NVIDIA GPU detected, using docker-compose-gpu.yml"
-	docker compose -f docker-compose-gpu.yml up --build
+	docker-compose -f docker-compose-gpu.yml up --build
 else
 	@echo "No NVIDIA GPU detected, using docker-compose.yml"
-	docker compose -f docker-compose.yml up --build
+	docker-compose -f docker-compose.yml up --build
 endif
 
 
 start_no_gpu:
 	mkdir -p ./models
-	docker compose up --build
+	docker-compose up --build
 
 stop:
-	docker compose stop
+	docker-compose stop
 
 test:
 	. .venv/bin/activate; command cd src; command python -m pytest
